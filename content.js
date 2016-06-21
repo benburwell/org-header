@@ -1,0 +1,58 @@
+(function() {
+	var loadStyles = function() {
+		chrome.storage.sync.get('orgs', function(result) {
+			applyMatchingHeader(result['orgs']);
+		});
+	};
+
+	var applyMatchingHeader = function(orgs) {
+		for (var idx = 0; idx < orgs.length; idx++) {
+			var org = orgs[idx];
+			var match = (org.orgName + '--' + org.sandboxName).toLowerCase();
+			var hostname = window.location.hostname.toLowerCase();
+			if (hostname.indexOf(match) > -1) {
+				applyStyle(org);
+				return;
+			}
+		}
+	};
+
+	var applyStyle = function(org) {
+		var style = document.createElement('style');
+		style.appendChild(document.createTextNode(''));
+		document.head.appendChild(style);
+		var rules = [
+			'body { padding-top: 40px; }',
+			'body::after {' +
+				'position: fixed;' +
+				'width: 100%;' +
+				'height: 40px;' +
+				'top: 0;' +
+				'left: 0;' +
+				'text-align: center;' +
+				'content: "' + org.label + '";' +
+				'background-color: ' + org.headerColor + ';' +
+				'color: ' + org.textColor + ';' +
+				'font-size: 20px;' +
+				'font-weight: bold;' +
+				'line-height: 40px;' +
+				'z-index: 1000;' +
+				'letter-spacing: 0.5px;' +
+				'text-shadow: 0 -1px rgba(0, 0, 0, 0.65);' +
+				'-webkit-user-select: none;' +
+				'cursor: default;' +
+				'box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.65);'
+		];
+		for (var idx = 0; idx < rules.length; idx++) {
+			style.sheet.insertRule(rules[idx], idx);
+		}
+	};
+
+	chrome.storage.onChanged.addListener(function(changes, areaName) {
+		if (changes.hasOwnProperty('orgs')) {
+			loadStyles();
+		}
+	});
+
+	loadStyles();
+})();

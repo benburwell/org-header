@@ -1,0 +1,25 @@
+{
+	"manifest_version": 2,
+
+	"name": "Org Header for Salesforce",
+	"description": "Allows you to give each org you log into regularly its own distinctive header color and name",
+	"version": "0.1.0",
+	"author": "Ben Burwell",
+
+	"content_scripts": [
+		{
+			"matches": [ "*://*.salesforce.com/*" ],
+			"js": [ "content.js" ],
+			"all_frames": false,
+			"run_at": "document_start"
+		}
+	],
+	"options_ui": {
+		"chrome_style": true,
+		"page": "options.html"
+	},
+	"permissions": [
+		"storage",
+		"https://*.salesforce.com/"
+	]
+}
