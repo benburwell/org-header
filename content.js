@@ -8,7 +8,7 @@
 	var applyMatchingHeader = function(orgs) {
 		for (var idx = 0; idx < orgs.length; idx++) {
 			var org = orgs[idx];
-			var match = (org.orgName + '--' + org.sandboxName).toLowerCase();
+			var match = org.orgName.toLowerCase();
 			var hostname = window.location.hostname.toLowerCase();
 			if (hostname.indexOf(match) > -1) {
 				applyStyle(org);
@@ -17,12 +17,9 @@
 		}
 	};
 
-	var applyStyle = function(org) {
-		var style = document.createElement('style');
-		style.appendChild(document.createTextNode(''));
-		document.head.appendChild(style);
-		var rules = [
-			'body { padding-top: 40px; }',
+	var getRules = function(org) {
+		return [
+			'body { padding-top: 40px !important; }',
 			'body::after {' +
 				'position: fixed;' +
 				'width: 100%;' +
@@ -43,6 +40,13 @@
 				'cursor: default;' +
 				'box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.65);'
 		];
+	};
+
+	var applyStyle = function(org) {
+		var style = document.createElement('style');
+		style.appendChild(document.createTextNode(''));
+		document.head.appendChild(style);
+		var rules = getRules(org);
 		for (var idx = 0; idx < rules.length; idx++) {
 			style.sheet.insertRule(rules[idx], idx);
 		}

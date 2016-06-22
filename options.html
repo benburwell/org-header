@@ -1,30 +1,38 @@
-<style>
-	table {
-		font-size: 12px;
-	}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Org Header for Salesforce</title>
+		<style>
+			table {
+				font-size: 12px;
+			}
 
-	.text-right {
-		text-align: right;
-	}
-</style>
-
-<table id="orgsTable">
-	<thead>
-		<tr>
-			<th>Org</th>
-			<th>Sandbox Name</th>
-			<th>Header Color</th>
-			<th>Text Color</th>
-			<th>Label</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody id="orgsTableBody"></tbody>
-</table>
-
-<p class="text-right">
-	<button id="addOrgBtn">+ Add Org</button>
-	<button id="saveBtn">Save Changes</button>
-</p>
-
-<script src="options.js"></script>
+			.text-right {
+				text-align: right;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			Add orgs you want to identify in the table below. The org name should be what appears in the URL, e.g., for
+			https://<strong>orgname--dev</strong>.cs42.my.salesforce.com, you would use "orgname--dev" in the table below.
+		</p>
+		<table id="orgsTable">
+			<thead>
+				<tr>
+					<th title="A URL fragment to match on .salesforce.com org .visual.force.com domains">Org Name</th>
+					<th title="A CSS color for the header background">Header Color</th>
+					<th title="A CSS color for the header text">Text Color</th>
+					<th title="The text you'd like to appear in the header">Label</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="orgsTableBody"></tbody>
+		</table>
+		<p class="text-right">
+			<button id="addOrgBtn">+ Add Org</button>
+			<button id="saveBtn">Save Changes</button>
+		</p>
+		<script src="options.js"></script>
+	</body>
+</html>

@@ -4,7 +4,6 @@ var ORG_ROW_CLASS = 'org-row';
 var TABLE_ID = 'orgsTable';
 var ATTRIBUTES = [
 	'orgName',
-	'sandboxName',
 	'headerColor',
 	'textColor',
 	'label'
@@ -25,7 +24,7 @@ var readOrgsFromDOM = function() {
 var removeOrg = function(orgToRemove) {
 	var orgs = readOrgsFromDOM();
 	orgs = orgs.filter(function(org) {
-		return orgToRemove.orgName !== org.orgName || orgToRemove.sandboxName !== org.sandboxName;
+		return orgToRemove.orgName !== org.orgName;
 	});
 	render(orgs);
 };
@@ -46,7 +45,6 @@ var addOrg = function() {
 	var orgs = readOrgsFromDOM();
 	orgs.push({
 		orgName: '',
-		sandboxName: '',
 		headerColor: '',
 		textColor: '',
 		label: ''
@@ -73,7 +71,7 @@ var isOrgValid = function(org) {
 			return false;
 		}
 	}
-	if (org.orgName.length === 0 || org.sandboxName.length === 0) {
+	if (org.orgName.length === 0) {
 		return false;
 	}
 	return true;
@@ -94,20 +92,9 @@ var getOrgCell = function(org) {
 	var cell = document.createElement('td');
 	var inp = document.createElement('input');
 	inp.setAttribute('type', 'text');
-	inp.setAttribute('placeholder', 'Name of production org');
+	inp.setAttribute('placeholder', 'Org name');
 	inp.classList.add('orgName');
 	inp.value = org.orgName;
-	cell.appendChild(inp);
-	return cell;
-};
-
-var getSandboxCell = function(org) {
-	var cell = document.createElement('td');
-	var inp = document.createElement('input');
-	inp.setAttribute('type', 'text');
-	inp.setAttribute('placeholder', 'Name of sandbox');
-	inp.classList.add('sandboxName');
-	inp.value = org.sandboxName;
 	cell.appendChild(inp);
 	return cell;
 };
@@ -160,7 +147,6 @@ var getOrgRow = function(org) {
 	var row = document.createElement('tr');
 	row.classList.add(ORG_ROW_CLASS);
 	row.appendChild(getOrgCell(org));
-	row.appendChild(getSandboxCell(org));
 	row.appendChild(getHeaderColorCell(org));
 	row.appendChild(getTextColorCell(org));
 	row.appendChild(getLabelCell(org));
