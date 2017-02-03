@@ -5,12 +5,21 @@
 		});
 	};
 
+	var getOrgName = function() {
+		var hostname = window.location.hostname.toLowerCase();
+		return hostname
+			.replace(/\.[^\.]+\.my\.salesforce\.com/, '')
+			.replace('.my.salesforce.com', '')
+			.replace(/--c\.[^\.]+\.visual\.force\.com/, '');
+	};
+
 	var applyMatchingHeader = function(orgs) {
+		var currentOrg = getOrgName();
+		console.log(currentOrg);
 		for (var idx = 0; idx < orgs.length; idx++) {
 			var org = orgs[idx];
 			var match = org.orgName.toLowerCase();
-			var hostname = window.location.hostname.toLowerCase();
-			if (hostname.indexOf(match) > -1) {
+			if (match === currentOrg) {
 				applyStyle(org);
 				return;
 			}
