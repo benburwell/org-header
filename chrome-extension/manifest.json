@@ -4,7 +4,7 @@
 	"name": "Org Header for Salesforce®",
 	"short_name": "Org Header",
 	"description": "Quickly distinguish which sandbox you're working in by setting up a distinctive header for each.",
-	"version": "0.2.1",
+	"version": "1.0.0",
 	"author": "Ben Burwell",
 
 	"icons": {
