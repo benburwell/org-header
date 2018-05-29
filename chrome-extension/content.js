@@ -10,6 +10,7 @@
 		return hostname
 			.replace(/\.[^\.]+\.my\.salesforce\.com/, '')
 			.replace('.my.salesforce.com', '')
+			.replace('.lightning.force.com', '')
 			.replace(/--c\.[^\.]+\.visual\.force\.com/, '');
 	};
 
@@ -29,6 +30,7 @@
 	var getRules = function(org) {
 		return [
 			'body { padding-top: 40px !important; }',
+			'header.slds-global-header_container { padding-top: 40px !important; }',
 			'body::after {' +
 				'position: fixed;' +
 				'width: 100%;' +
@@ -47,7 +49,8 @@
 				'text-shadow: 0 -1px rgba(0, 0, 0, 0.65);' +
 				'-webkit-user-select: none;' +
 				'cursor: default;' +
-				'box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.65);'
+				'box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.65);' +
+			'}'
 		];
 	};
 
