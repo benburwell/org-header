@@ -11,6 +11,7 @@
 			.replace(/\.[^\.]+\.my\.salesforce\.com/, '')
 			.replace('.my.salesforce.com', '')
 			.replace('.lightning.force.com', '')
+			.replace('.sandbox.lightning.force.com', '')
 			.replace(/--c\.[^\.]+\.visual\.force\.com/, '');
 	};
 
